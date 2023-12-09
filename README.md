@@ -20,7 +20,6 @@ This script merges multiple PDFs, adding two random pages from each file in a di
 
 ```
 python merge_pdfs_with_random_two_pages.py questions solutions
-
 ```
 
 **Output:**
