@@ -1,34 +1,51 @@
-**Random PDF Merger**
+# **Random PDF Merger**
 
-This script merges multiple PDFs, adding two random pages from each file in a directory, into one PDF.
+This script allows you to merge multiple PDFs into one PDF, selecting pages based on different algorithms.
 
-**Requirements:**
+### **Requirements**
 
--   Python 3.11+
--   PyPDF2 library
+-   Python 3
+-   PyPDF2 library (install using `pip install PyPDF2`)
 
-**Instructions:**
+### **Features**
 
-1. Create two folders: `questions` and `solutions`.
-2. Place your PDF files into the appropriate folder.
-3. Run the `merge_pdfs_with_random_two_pages.py` script.
-4. Two new PDFs will be created: `merged_random.pdf` and `merged_random_solutions.pdf` with two random pages from each question and solution PDF, respectively.
+-   Merges multiple PDFs from a directory.
+-   Supports three page selection algorithms:
+    -   **Random (r):** Randomly selects a specified number of pages from each PDF.
+    -   **Split (s):** Selects pages at a specified interval with an optional starting point.
+    -   **Manual (m):** Allows user to manually select pages for each PDF.
+-   Handles invalid user input and provides clear instructions.
+-   Generates informative messages during execution.
 
-**Example Usage:**
+### **Usage**
 
-**Bash**
+1. Download the script and save it to your computer.
+2. Open a terminal and navigate to the directory containing the script and your PDF files.
+3. Run the script with the following command:
 
-```
-python merge_pdfs_with_random_two_pages.py questions solutions
+`python merge_pdfs.py`
 
-```
+1. Choose the desired page selection algorithm by entering 'r' for random, 's' for split, or 'm' for manual.
+2. If choosing the random or split algorithm, enter the number of pages to grab per file.
+3. For the split algorithm, enter the starting page and step size (optional).
+4. The script will merge the PDFs and save the merged PDF to a file named `merged_random.pdf` for questions and `merged_random_solutions.pdf` for solutions.
 
-**Output:**
+### **Additional notes**
 
-`Merged PDFs into merged_random.pdf and merged_random_solutions.pdf`
+-   You can customize the output filenames by modifying the script.
+-   The `per_file` parameter for the random and split algorithms defaults to 2.
+-   The `start` and `step` parameters for the split algorithm are optional and default to 0.
 
-**Note:**
+### **Example**
 
--   This script assumes all PDF files are in the same directory.
--   The script will not overwrite existing files.
+`Python 3.10.8 (main, May 26 2022, 16:24:23) [GCC 11.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
 
+> > > python merge_pdfs.py
+> > > Select pages by (r)andom or (s)plit: s
+> > > Enter number of pages to grab per file: 2
+> > > Enter start page: 1
+> > > Enter step size: 2
+> > > Merged PDFs into merged_random.pdf and merged_random_solutions.pdf`
+
+This example merges PDFs with the split algorithm, selecting 2 pages per file starting from page 1 with a step size of 2.
