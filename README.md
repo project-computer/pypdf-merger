@@ -1,4 +1,4 @@
-# **Random PDF Merger**
+#
 
 This script allows you to merge multiple PDFs into one PDF, selecting pages based on different algorithms.
 
@@ -38,14 +38,15 @@ This script allows you to merge multiple PDFs into one PDF, selecting pages base
 
 ### **Example**
 
-`Python 3.10.8 (main, May 26 2022, 16:24:23) [GCC 11.2.0] on linux
+```bash
+Python 3.11.0
 Type "help", "copyright", "credits" or "license" for more information.
-
-> > > python merge_pdfs.py
-> > > Select pages by (r)andom or (s)plit: s
-> > > Enter number of pages to grab per file: 2
-> > > Enter start page: 1
-> > > Enter step size: 2
-> > > Merged PDFs into merged_random.pdf and merged_random_solutions.pdf`
+>>> python merge_pdfs.py
+Select pages by (r)andom or (s)plit: s
+Enter number of pages to grab per file: 2
+Enter start page: 1
+Enter step size: 2
+Merged PDFs into merged_random.pdf and merged_random_solutions.pdf
+```
 
 This example merges PDFs with the split algorithm, selecting 2 pages per file starting from page 1 with a step size of 2.
