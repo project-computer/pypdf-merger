@@ -23,7 +23,7 @@ This script allows you to merge multiple PDFs into one PDF, selecting pages base
 2. Open a terminal and navigate to the directory containing the script and your PDF files.
 3. Run the script with the following command:
 
-`python merge_pdfs.py`
+`python main.py`
 
 1. Choose the desired page selection algorithm by entering 'r' for random, 's' for split, or 'm' for manual.
 2. If choosing the random or split algorithm, enter the number of pages to grab per file.
