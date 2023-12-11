@@ -2,7 +2,7 @@ from PyPDF2 import PdfReader, PdfWriter
 import os
 import glob
 import random
-
+import pprint
 from select_algorithm import get_manual, get_random, get_split
 
 def read_files(pdf_directory):
@@ -63,14 +63,14 @@ def merge_pdfs(path_pages, output_path):
 def convert(d, m):
   return {k: v for k, v in zip(d.keys(), m.values())}
 
-
 if __name__ == "__main__":
   question_files =  read_files("questions")
   solution_files = read_files("solutions")
   selected = select_pages(question_files)
   selected_question = convert(question_files, selected)
   selected_solution = convert(solution_files, selected)
-
+  print(pprint.pformat(selected_question, indent=4))
+  print(pprint.pformat(selected_solution, indent=4))
   merge_pdfs(selected_question, "merged_random.pdf")
   merge_pdfs(selected_solution, "merged_random_solutions.pdf")
  
