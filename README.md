@@ -1,4 +1,4 @@
-\# pdf-merger
+# pdf-merger
 
 
 This script allows you to merge multiple PDFs into one PDF, selecting pages based on different algorithms.
