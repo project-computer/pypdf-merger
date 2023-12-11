@@ -3,93 +3,74 @@ import os
 import glob
 import random
 
-from select_algorithm import get_manual, get_split
+from select_algorithm import get_manual, get_random, get_split
 
-# def read_files(pdf_directory):
-#   """
-#   Reads all PDF files in a directory.
-
-#   Args:
-#     pdf_directory: Path to the directory containing PDF files.
-
-#   Returns:
-#     A list of PdfReader objects.
-#   """
-#   # Get all PDF paths in the directory
-#   pdf_paths = glob.glob(os.path.join(pdf_directory, "*.pdf"))
-
-#   # Process each PDF
-#   path_pages = {}
-#   for pdf_path in pdf_paths:
-#     reader = PdfReader(pdf_path)
-#     num_pages = len(reader.pages)
-#     path_pages[pdf_path] = num_pages
-
-#   return path_pages
-
-def merge_pdfs(pdf_directory, output_path, select_algorithm='r', per_file=2, step=2, start=0, selected=[]):
+def read_files(pdf_directory):
   """
-  Merges multiple PDFs, adding two random pages from each file in a directory, into one PDF.
+  Reads all PDF files in a directory.
 
   Args:
     pdf_directory: Path to the directory containing PDF files.
-    output_path: Path to the merged PDF file.
-  """
- 
-  
-  writer = PdfWriter()
 
+  Returns:
+    A list of PdfReader objects.
+  """
   # Get all PDF paths in the directory
   pdf_paths = glob.glob(os.path.join(pdf_directory, "*.pdf"))
+
   # Process each PDF
-  selected_dict = {}
-  i=0
+  path_pages = {}
   for pdf_path in pdf_paths:
     reader = PdfReader(pdf_path)
     num_pages = len(reader.pages)
+    path_pages[pdf_path] = num_pages
 
-    # Randomly select two pages
-    
-    if (select_algorithm == 'r'):
-      selected_pages = random.sample(range(num_pages), per_file)
-    elif (select_algorithm == 's'):
-      selected_pages = get_split(num_pages, start, step, per_file)
-    elif (select_algorithm == 'm'):
-      if (selected):
-        selected_pages = selected[i]
-      else:
-        selected_pages = get_manual(pdf_path,num_pages)
-    selected_dict[i] = selected_pages
-      
-    # selected_pages = random.sample(range(num_pages), 2)
-    print(pdf_path,selected_pages)
-    for page_index in selected_pages:
+  return path_pages
+
+
+def select_pages(path_pages):
+  select_algorithm = input("Select pages by (r)andom or (s)plit or (m)anual:  ")
+  selected = {}
+  i=0
+  if (select_algorithm == 'r'):
+    per_file = int(input("Enter number of pages to grab per file: "))
+    for value in path_pages.values():
+        selected[i]=get_random(value,per_file)
+        i+=1
+  elif (select_algorithm == 's'):
+    per_file = int(input("Enter number of pages to grab per file: "))
+    start = int(input("Enter start page: "))
+    step = int(input("Enter step size: "))
+    for value in path_pages.values():
+        selected[i]=get_split(value,start,step,per_file)
+        i+=1
+  elif (select_algorithm == 'm'):
+    for key,value in path_pages.items():
+        selected[i]=get_manual(key,value)
+        i+=1
+  return selected
+
+def merge_pdfs(path_pages, output_path):
+  writer = PdfWriter()
+  for pdf_path, pages in path_pages.items():
+    reader = PdfReader(pdf_path)
+    for page_index in pages:
       page = reader.pages[page_index]
       writer.add_page(page)
-    i+=1
-  # Write the merged PDF
   with open(output_path, 'wb') as output_file:
     writer.write(output_file)
-  return selected_dict
-if __name__ == "__main__":
-  select_algorithm = input("Select pages by (r)andom or (s)plit:  ")
-  per_file = 2
-  step=0
-  start=0
-  if (select_algorithm == 'r' or select_algorithm == 's'):
-    per_file = int(input("Enter number of pages to grab per file: "))
-    if (select_algorithm == 's'):
-      start = int(input("Enter start page: "))
-      step = int(input("Enter step size: "))
-  # # Example usage
-  pdf_questions = "questions"
-  pdf_solutions = "solutions"
-  question_output_path = "merged_random.pdf"
-  solution_output_path = "merged_random_solutions.pdf"
-  
-  # print(read_files(pdf_questions))
-  # print(read_files(pdf_solutions))
-  tmp = merge_pdfs(pdf_questions, question_output_path, select_algorithm, per_file, step, start)
-  merge_pdfs(pdf_solutions, solution_output_path, select_algorithm, per_file, step, start, tmp)
 
-  print(f'Merged PDFs into {question_output_path} and {solution_output_path}')
+def convert(d, m):
+  return {k: v for k, v in zip(d.keys(), m.values())}
+
+
+if __name__ == "__main__":
+  question_files =  read_files("questions")
+  solution_files = read_files("solutions")
+  selected = select_pages(question_files)
+  selected_question = convert(question_files, selected)
+  selected_solution = convert(solution_files, selected)
+
+  merge_pdfs(selected_question, "merged_random.pdf")
+  merge_pdfs(selected_solution, "merged_random_solutions.pdf")
+ 

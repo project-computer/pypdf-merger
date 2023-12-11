@@ -1,3 +1,17 @@
+import random
+# feature random
+def get_random(num_pages, per_file=2):
+  """
+  Generates a list of random page numbers.
+
+  Args:
+    num_pages: The total number of pages in the PDF.
+    per_file: The number of pages to select.
+
+  Returns:
+    A list of random page numbers.
+  """
+  return random.sample(range(num_pages), per_file)
 # Feature manual
 def get_manual(file_name,num_pages):
   """
