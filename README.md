@@ -19,7 +19,7 @@ This script allows you to merge multiple PDFs into one PDF, selecting pages base
 -   Generates informative messages during execution.
 
 ### **Usage**
-
+0. Create directory contain pdfs name `questions` and `solutions`
 1. Download the script and save it to your computer.
 2. Open a terminal and navigate to the directory containing the script and your PDF files.
 3. Run the script with the following command: 
