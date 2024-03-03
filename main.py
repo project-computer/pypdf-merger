@@ -61,7 +61,10 @@ def merge_pdfs(path_pages, output_path):
     writer.write(output_file)
 
 def convert(d, m):
-  return {k: v for k, v in zip(d.keys(), m.values())}
+  a = {k: v for k, v in zip(d.keys(), m.values())}
+  b = dict(sorted(a.items()))
+  return b
+           
 
 if __name__ == "__main__":
   question_files =  read_files("questions")
@@ -69,8 +72,14 @@ if __name__ == "__main__":
   selected = select_pages(question_files)
   selected_question = convert(question_files, selected)
   selected_solution = convert(solution_files, selected)
-  print(pprint.pformat(selected_question, indent=4))
-  print(pprint.pformat(selected_solution, indent=4))
+  a = dict(sorted(selected_question.items()))
+  print(a)
+  # selected_question = sorted(selected_question)
+  # selected_solution = sorted(selected_solution) 
+  print(selected_question)
+  print(selected_solution)
+  # print(pprint.pformat(selected_question, indent=4))
+  # print(pprint.pformat(selected_solution, indent=4))
   merge_pdfs(selected_question, "merged_random.pdf")
   merge_pdfs(selected_solution, "merged_random_solutions.pdf")
  
