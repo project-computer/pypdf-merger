@@ -1,33 +1,32 @@
 # pdf-merger
 
-
 This script allows you to merge multiple PDFs into one PDF, selecting pages based on different algorithms.
 
-### **Requirements**
+## **Requirements**
 
--   Python 3
--   PyPDF2 library (install using `pip install PyPDF2`)
+- Python 3
+- PyPDF2 library (install using `pip install PyPDF2`)
 
-### **Features**
+## **Features**
 
--   Merges multiple PDFs from a directory.
--   Supports three page selection algorithms:
-    -   **Random (r):** Randomly selects a specified number of pages from each PDF.
-    -   **Split (s):** Selects pages at a specified interval with an optional starting point.
-    -   **Manual (m):** Allows user to manually select pages for each PDF.
--   Handles invalid user input and provides clear instructions.
--   Generates informative messages during execution.
+- Merges multiple PDFs from a directory.
+- Supports three page selection algorithms:
+  - **Random (r):** Randomly selects a specified number of pages from each PDF.
+  - **Split (s):** Selects pages at a specified interval with an optional starting point.
+  - **Manual (m):** Allows user to manually select pages for each PDF.
+- Handles invalid user input and provides clear instructions.
+- Generates informative messages during execution.
 
-### **Usage**
+## **Usage**
+
 0. Create directory contain pdfs name `questions` and `solutions`
 1. Download the script and save it to your computer.
 2. Open a terminal and navigate to the directory containing the script and your PDF files.
-3. Run the script with the following command: 
+3. Run the script with the following command:
+
 ```bash
  python main.py
  ```
-
-
 
 1. Choose the desired page selection algorithm by entering 'r' for random, 's' for split, or 'm' for manual.
 2. If choosing the random or split algorithm, enter the number of pages to grab per file.
