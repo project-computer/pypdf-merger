@@ -24,8 +24,8 @@ def read_files(pdf_directory):
     reader = PdfReader(pdf_path)
     num_pages = len(reader.pages)
     path_pages[pdf_path] = num_pages
-
-  return path_pages
+  sorted_path_pages = dict(sorted(path_pages.items()))
+  return sorted_path_pages
 
 
 def select_pages(path_pages):
@@ -70,6 +70,9 @@ if __name__ == "__main__":
   question_files =  read_files("questions")
   solution_files = read_files("solutions")
   selected = select_pages(question_files)
+  print(selected)
+  print(question_files)
+  print(solution_files)
   selected_question = convert(question_files, selected)
   selected_solution = convert(solution_files, selected)
   a = dict(sorted(selected_question.items()))
