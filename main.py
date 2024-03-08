@@ -65,7 +65,34 @@ def convert(d, m):
   b = dict(sorted(a.items()))
   return b
            
+def check_file_exists(file_path):
+    """
+    Checks if a file already exists.
 
+    Args:
+      file_path: Path to the file.
+
+    Returns:
+      True if the file exists, False otherwise.
+    """
+    return os.path.exists(file_path)
+
+def generate_unique_file_name(file_path):
+  """
+  Generates a unique file name by appending a number to the file name.
+
+  Args:
+    file_path: Path to the file.
+
+  Returns:
+    A unique file name.
+  """
+  file_name, file_extension = os.path.splitext(file_path)
+  counter = 1
+  while check_file_exists(file_path):
+    file_path = f"{file_name}_{counter}{file_extension}"
+    counter += 1
+  return file_path
 if __name__ == "__main__":
   question_files =  read_files("questions")
   solution_files = read_files("solutions")
@@ -76,13 +103,14 @@ if __name__ == "__main__":
   selected_question = convert(question_files, selected)
   selected_solution = convert(solution_files, selected)
   a = dict(sorted(selected_question.items()))
-  print(a)
-  # selected_question = sorted(selected_question)
-  # selected_solution = sorted(selected_solution) 
-  print(selected_question)
-  print(selected_solution)
+  # print(a)
+  # print(selected_question)
+  # print(selected_solution)
   # print(pprint.pformat(selected_question, indent=4))
   # print(pprint.pformat(selected_solution, indent=4))
-  merge_pdfs(selected_question, "merged_random.pdf")
-  merge_pdfs(selected_solution, "merged_random_solutions.pdf")
- 
+  
+  merged_random_file_path = generate_unique_file_name("exam-math.pdf")
+  merged_random_solutions_file_path = generate_unique_file_name("exam-math-sol.pdf")
+
+  merge_pdfs(selected_question, merged_random_file_path)
+  merge_pdfs(selected_solution, merged_random_solutions_file_path)
