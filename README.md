@@ -11,9 +11,9 @@ This script allows you to merge multiple PDFs into one PDF, selecting pages base
 
 - Merges multiple PDFs from a directory.
 - Supports three page selection algorithms:
-  - **Random (r):** Randomly selects a specified number of pages from each PDF.
-  - **Split (s):** Selects pages at a specified interval with an optional starting point.
-  - **Manual (m):** Allows user to manually select pages for each PDF.
+  - **Random (r):** Randomly selects a specified number of pages from each PDF file.
+  - **Split (s):** Selects pages from each PDF file starting from a specified page number with a specified step size.
+  - **Manual (m):** Allows the user to manually select pages from each PDF file.
 - Handles invalid user input and provides clear instructions.
 - Generates informative messages during execution.
 
