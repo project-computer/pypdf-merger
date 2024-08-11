@@ -2,6 +2,31 @@
 
 This script allows you to merge multiple PDFs into one PDF, selecting pages based on different algorithms.
 
+## Creates a virtual environment using venv
+
+This function creates a virtual environment using the venv module in Python. It is compatible with both Windows and Linux operating systems.
+
+Usage:
+
+- For Windows:
+  - Open Command Prompt or PowerShell.
+  - Navigate to the directory where you want to create the virtual environment.
+  - Run the following command:
+     `python -m venv <venv_name>`
+  - Activate the virtual environment by running:
+      `<venv_name>\Scripts\activate`
+- For Linux:
+  - Open Terminal.
+  - Navigate to the directory where you want to create the virtual environment.
+  - Run the following command:
+      `python3 -m venv <venv_name>`
+  - Activate the virtual environment by running:
+      `source <venv_name>/bin/activate`
+
+Note: Replace `<venv_name>` with the desired name for your virtual environment.
+
+For more information about using venv in Python, you can refer to the following blog post: [Python Virtual Environment (venv)](https://devhub.in.th/blog/python-virtual-environment-venv)
+
 ## **Requirements**
 
 - Python 3
